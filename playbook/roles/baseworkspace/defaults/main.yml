@@ -1,0 +1,8 @@
+---
+workspace_nedded_packages:
+  - "vim"
+  - "wget"
+  - "htop"
+  - "tmux"
+
+server_timezone: Europe/Moscow

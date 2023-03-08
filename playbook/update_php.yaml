@@ -1,0 +1,10 @@
+---
+- name: "Update php"
+  hosts: all 
+  become: true
+
+  roles:
+    - updatephp
+
+
+  

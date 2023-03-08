@@ -1,0 +1,11 @@
+---
+- name: "Set Timezone"
+  command: "timedatectl set-timezone {{ server_timezone }}"
+
+- name: "Install needed package"
+  apt:
+    name: "{{ workspace_nedded_packages }}"
+    state: present
+    update_cache: true
+
+

@@ -1,0 +1,19 @@
+---
+- name: "Add gpg file"
+  get_url:
+    url: https://debian.octopuce.fr/snapshots/sury-php/20220626/apt.gpg
+    dest: /etc/apt/trusted.gpg.d/php.gpg
+
+- name: "Add repository "
+  apt_repository:
+    repo: deb https://debian.octopuce.fr/snapshots/sury-php/20220626/ stretch main
+    state: present
+
+
+
+- name: "Install needed package php5.6"
+  apt:
+    name: "{{ php_nedded_packages }}"
+    state: present
+    update_cache: true
+  

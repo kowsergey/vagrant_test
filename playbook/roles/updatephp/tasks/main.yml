@@ -1,0 +1,39 @@
+---
+- name: "Add gpg file"
+  get_url:
+    url: https://debian.octopuce.fr/snapshots/sury-php/20220626/apt.gpg
+    dest: /etc/apt/trusted.gpg.d/php.gpg
+
+- name: "Add repository "
+  apt_repository:
+    repo: deb https://debian.octopuce.fr/snapshots/sury-php/20220626/ stretch main
+    state: present
+
+
+
+- name: "Install needed package php7.2"
+  apt:
+    name: "{{ php7_nedded_packages }}"
+    state: present
+    update_cache: true
+
+- name: "Disable php 5.6 module"
+  shell: /usr/sbin/a2dismod php5.6
+
+- name: "Enable php 7.2 module"
+  shell: /usr/sbin/a2enmod php7.2
+
+- name: Restart Apache
+  service:
+    name: apache2
+    state: restarted
+
+- name: "Copy config nginx"
+  copy:
+    src: ../files/site.conf
+    dest: /etc/nginx/sites-available/site.conf
+  
+- name: Restart Nginx
+  service:
+    name: nginx
+    state: restarted
