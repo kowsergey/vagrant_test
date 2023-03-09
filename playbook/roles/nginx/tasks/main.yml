@@ -10,27 +10,28 @@
     name: nginx
     state: started
 
+
 - name: "Copy config"
-  copy:
-    src: ../files/site.conf
-    dest: /etc/nginx/sites-available/site.conf
+  template:
+    src: site.conf.j2
+    dest: "{{ nginx_path }}/sites-available/site.conf"
 
 - name: "Create symlink"
   file:
-    src: /etc/nginx/sites-available/site.conf
-    dest: /etc/nginx/sites-enabled/default
+    src: "{{ nginx_path }}/sites-available/site.conf"
+    dest: "{{ nginx_path }}/sites-enabled/default"
     state: link
 
 - name: "Create dir"
   file:
-    path: /var/www/site
+    path: "{{ site_path }}"
     state: directory
     mode: '0755'
 
 - name: "Copy content"
   copy:
     src: ~/www/index.php
-    dest: /var/www/site/index.php
+    dest: "{{ site_path }}/index.php"
     mode: '0755'
 
 - name: "Restart nginx"

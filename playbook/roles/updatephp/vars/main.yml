@@ -1,0 +1,6 @@
+---
+php_ver: 7.2
+nginx_port: 80
+nginx_path: /etc/nginx
+nginx_log_path: /var/log/nginx
+site_path: /var/www/site

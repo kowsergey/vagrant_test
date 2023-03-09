@@ -1,0 +1,15 @@
+<VirtualHost *:{{ apache_port }}>
+   ServerAdmin webmaster@localhost
+   DocumentRoot {{ site_path }}
+   ErrorLog {{ apache_log_path }}/error.log
+   CustomLog {{ apache_log_path }}/access.log combined
+
+   <Directory {{ site_path }}>
+         Options -Indexes
+   </Directory>
+
+   <IfModule mod_dir.c>
+       DirectoryIndex index.php index.html
+   </IfModule>
+
+</VirtualHost>

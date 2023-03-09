@@ -29,9 +29,9 @@
     state: restarted
 
 - name: "Copy config nginx"
-  copy:
-    src: ../files/site.conf
-    dest: /etc/nginx/sites-available/site.conf
+  template:
+    src: site.conf.j2
+    dest: "{{ nginx_path }}/sites-available/site.conf"
   
 - name: Restart Nginx
   service:
